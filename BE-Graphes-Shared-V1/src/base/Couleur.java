@@ -16,6 +16,8 @@ public class Couleur {
     
     public static void set(Dessin d, char type) {
 
+    	
+    	
 	// Voir le fichier Descripteur.java pour le type des routes.
 	switch (type) {
 	case 'a':
