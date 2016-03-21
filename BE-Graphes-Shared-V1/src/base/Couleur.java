@@ -13,6 +13,7 @@ public class Couleur {
     static final Color tiroute = new Color(0, 0, 0) ;
     static final Color cote = Color.blue ;
 
+    
     public static void set(Dessin d, char type) {
 
 	// Voir le fichier Descripteur.java pour le type des routes.
