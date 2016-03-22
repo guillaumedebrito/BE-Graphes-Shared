@@ -6,6 +6,8 @@ import base.* ;
 /**
  * Classe abstraite representant un algorithme (connexite, plus court chemin, etc.)
  */
+
+
 public abstract class Algo {
 
     protected PrintStream sortie ;
