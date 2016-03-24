@@ -2,13 +2,13 @@ package core;
 import base.Descripteur;
 
 
-public class Aretes {
+public class Arete {
 	
 	private int longueurArete;
 	private Descripteur descript;
 	private Sommets sommetSucc;
 	
-	public Aretes(int longueurArete, Descripteur descript, Sommets sommetSucc){
+	public Arete(int longueurArete, Descripteur descript, Sommets sommetSucc){
 		this.longueurArete=longueurArete;
 		this.descript=descript;
 		this.sommetSucc=sommetSucc;
@@ -29,7 +29,7 @@ public class Aretes {
 	}
 	
 	//seter, jet seter
-	public void setLongueurArrete(int longueurArete) {
+	public void setLongueurArete(int longueurArete) {
 		this.longueurArete = longueurArete;
 	}
 

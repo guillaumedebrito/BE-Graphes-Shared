@@ -7,7 +7,7 @@ public class Sommets {
 	private int num;
 	private float longitudes;
 	private float latitudes;
-	private ArrayList<Aretes> arete;
+	private ArrayList<Arete> arete;
 	private int nbSuccesseur ; 
 	
 	
@@ -16,11 +16,11 @@ public class Sommets {
 		this.longitudes=longitudes;
 		this.latitudes=latitudes;
 		this.nbSuccesseur=nbSuccesseur ; 
-		this.arete = new ArrayList<Aretes>();
+		this.arete = new ArrayList<Arete>();
 	}
 	
 	
-	public void addArete(Aretes a) {
+	public void addArete(Arete a) {
 		arete.add(a) ; 
 	}
 	
@@ -40,7 +40,7 @@ public class Sommets {
 		return this.latitudes;
 	}
 
-	public ArrayList<Aretes> getArretes() {
+	public ArrayList<Arete> getArete() {
 		return arete;
 	}
 	
@@ -49,8 +49,8 @@ public class Sommets {
 	}
 
 	//seter, jet seter
-	public void setArretes(ArrayList<Aretes> arretes) {
-		this.arete = arretes;
+	public void setArete(ArrayList<Arete> arete) {
+		this.arete = arete;
 	}
 	
 	public void setNum(int num) {

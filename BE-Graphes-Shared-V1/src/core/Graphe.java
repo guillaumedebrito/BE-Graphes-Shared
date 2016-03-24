@@ -144,9 +144,9 @@ public class Graphe {
 				    int nb_segm   = dis.readUnsignedShort() ;
 				    
 				    edges++ ;
-				    sommets[cptSommet].addArete(new Aretes(longueur, descripteurs[descr_num],sommets[dest_node])) ;
+				    sommets[cptSommet].addArete(new Arete(longueur, descripteurs[descr_num],sommets[dest_node])) ;
 				    if (!descripteurs[descr_num].isSensUnique()) {
-				    	sommets[dest_node].addArete(new Aretes(longueur, descripteurs[descr_num],sommets[cptSommet])) ;
+				    	sommets[dest_node].addArete(new Arete(longueur, descripteurs[descr_num],sommets[cptSommet])) ;
 				    	int tmp = (sommets[dest_node].getNbSuccesseur()); 
 				    	tmp++ ; 
 				    	sommets[dest_node].setNbSuccesseur(tmp) ; 
