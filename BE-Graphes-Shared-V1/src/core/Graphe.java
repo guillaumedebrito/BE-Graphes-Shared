@@ -81,22 +81,28 @@ public class Graphe {
 		    int nb_descripteurs = dis.readInt () ;
 		    int nb_nodes = dis.readInt () ;
 		    
-		    
-		    
-		    this.sommets=new Sommets[nb_nodes] ; 
+		    //Création des tableaux de longitudes,latitudes,sommets,predecesseurs
+		    longitudes=new float[nb_nodes] ; //A MODIFIER AVEC SITUER CLICK
+		    latitudes=new float[nb_nodes] ;  //A MODIFIER AVEC SITUER CLICK
+		    sommets=new Sommets[nb_nodes] ; 
+		    int [] predecesseurs = new int[nb_nodes] ;
 		    int cptSommet ; //compteur pour la boucle 
 		    
 		    
 		    
 		    
 		    
-		    // En fonction de vos choix de conception, vous devrez certainement adapter la suite.
+		    // En fonction de vos choix de conception, vous devrez certainement adapter la suite.//
 		    
-		  
+		    
+		    
 		    //Lecture des sommets 
 		    for (cptSommet=0 ; cptSommet<nb_nodes ; cptSommet++) {
-		    	sommets[cptSommet]=new Sommets(cptSommet, ((float)dis.readInt ()) / 1E6f , ((float)dis.readInt ()) / 1E6f,
-		    			dis.readUnsignedByte()); 
+		    	longitudes[cptSommet]=(float)dis.readInt() ; //A MODIFIER AVEC SITUER CLICK
+		    	latitudes[cptSommet]=(float)dis.readInt() ;  //A MODIFIER AVEC SITUER CLICK
+		    	predecesseurs[cptSommet]=dis.readUnsignedByte() ; 
+		    	sommets[cptSommet]=new Sommets(cptSommet, (longitudes[cptSommet]) / 1E6f , (latitudes[cptSommet]) / 1E6f,
+		    			predecesseurs[cptSommet]); //A MODIFIER AVEC SITUER CLICK
 		    }
 		    
 		    
@@ -109,19 +115,19 @@ public class Graphe {
 		    
 		    // Lecture des descripteurs
 		    for (int num_descr = 0 ; num_descr < nb_descripteurs ; num_descr++) {
-			// Lecture du descripteur numero num_descr
-			descripteurs[num_descr] = new Descripteur(dis) ;
-
-			// On affiche quelques descripteurs parmi tous.
-			if (0 == num_descr % (1 + nb_descripteurs / 400))
-			    System.out.println("Descripteur " + num_descr + " = " + descripteurs[num_descr]) ;
+				// Lecture du descripteur numero num_descr
+				descripteurs[num_descr] = new Descripteur(dis) ;
+	
+				// On affiche quelques descripteurs parmi tous.
+				if (0 == num_descr % (1 + nb_descripteurs / 400))
+				    System.out.println("Descripteur " + num_descr + " = " + descripteurs[num_descr]) ;
 		    }
 		    
 		    
 		    Utils.checkByte(254, dis) ;
 		    
 		    for (cptSommet=0 ; cptSommet<nb_nodes ; cptSommet++) {
-		    	for (int cptSuccesseurs=0 ; cptSuccesseurs<sommets[cptSommet].getNbSuccesseur() ; cptSuccesseurs++) {
+		    	for (int cptSuccesseurs=0 ; cptSuccesseurs<predecesseurs[cptSommet] ; cptSuccesseurs++) {
 		    		
 		    		// zone du successeur
 				    int succ_zone = dis.readUnsignedByte() ;
@@ -139,12 +145,13 @@ public class Graphe {
 				    int nb_segm   = dis.readUnsignedShort() ;
 				    
 				    edges++ ;
+				    
 				    sommets[cptSommet].addArete(new Arete(longueur, descripteurs[descr_num],sommets[dest_node])) ;
+				    // En cas de double voie, il faut ajouter arete et successeur sur les deux sommets 
 				    if (!descripteurs[descr_num].isSensUnique()) {
 				    	sommets[dest_node].addArete(new Arete(longueur, descripteurs[descr_num],sommets[cptSommet])) ;
-				    	int tmp = (sommets[dest_node].getNbSuccesseur()); 
-				    	tmp++ ; 
-				    	sommets[dest_node].setNbSuccesseur(tmp) ; 
+				    	int tmp=(sommets[dest_node].getNbSuccesseur()+1) ; 
+				    	sommets[dest_node].setNbSuccesseur(tmp);
 				    } 
 
 				    
@@ -155,7 +162,7 @@ public class Graphe {
 				    float current_lat  = sommets[cptSommet].getLatitudes() ;
 				    
 				    
-				    // Chaque segment est dessine'
+				    // Chaque segment est dessiné
 				    for (int i = 0 ; i < nb_segm ; i++) {
 						float delta_lon = (dis.readShort()) / 2.0E5f ;
 						float delta_lat = (dis.readShort()) / 2.0E5f ;
@@ -176,6 +183,7 @@ public class Graphe {
 		    System.out.println("Fichier lu : " + nb_nodes + " sommets, " + edges + " aretes, " 
 				       + nb_descripteurs + " descripteurs.") ;
 		    
+		    //TEST DE BASE, pour insa, trouver 2.105 ! 
 		    float sum =0 ; 
 		    for (cptSommet=0 ; cptSommet<nb_nodes ; cptSommet++) {
 		    	sum+=(float)sommets[cptSommet].getNbSuccesseur() ; 
@@ -183,6 +191,9 @@ public class Graphe {
 		    float div = sum/((float)nb_nodes) ; 
 		    System.out.println("div : "+div);
 	
+		    
+		    
+		    
 		} catch (IOException e) {
 		    e.printStackTrace() ;
 		    System.exit(1) ;
