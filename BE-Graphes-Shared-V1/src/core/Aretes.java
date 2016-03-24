@@ -2,22 +2,22 @@ package core;
 import base.Descripteur;
 
 
-public class Arretes {
+public class Aretes {
 	
-	private int longueurArrete;
+	private int longueurArete;
 	private Descripteur descript;
 	private Sommets sommetSucc;
 	
-	public Arretes(int longueurArrete, Descripteur descript, Sommets sommetSucc){
-		this.longueurArrete=longueurArrete;
+	public Aretes(int longueurArete, Descripteur descript, Sommets sommetSucc){
+		this.longueurArete=longueurArete;
 		this.descript=descript;
 		this.sommetSucc=sommetSucc;
 	}
 	
 	
 	//geter arra ya les condés
-	public int getLongueurArrete() {
-		return longueurArrete;
+	public int getLongueurArete() {
+		return longueurArete;
 	}
 	
 	public Descripteur getDescript() {
@@ -29,8 +29,8 @@ public class Arretes {
 	}
 	
 	//seter, jet seter
-	public void setLongueurArrete(int longueurArrete) {
-		this.longueurArrete = longueurArrete;
+	public void setLongueurArrete(int longueurArete) {
+		this.longueurArete = longueurArete;
 	}
 
 	public void setDescript(Descripteur descript) {
