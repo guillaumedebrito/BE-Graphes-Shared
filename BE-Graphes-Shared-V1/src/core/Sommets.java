@@ -27,6 +27,7 @@ public class Sommets {
 	
 	
 	
+	
 	//geter arra ya les condés
 	public int getNum(){
 		return this.num;
