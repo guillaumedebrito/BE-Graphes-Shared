@@ -7,6 +7,7 @@ public class Arete {
 	private int longueurArete;
 	private Descripteur descript;
 	private Sommets sommetSucc;
+	private int test ; 
 	
 	public Arete(int longueurArete, Descripteur descript, Sommets sommetSucc){
 		this.longueurArete=longueurArete;
