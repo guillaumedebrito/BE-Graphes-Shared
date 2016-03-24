@@ -19,11 +19,6 @@ public class Graphe {
 	private Sommets[] sommets ; 
 	
 	
-	
-	
-	
-	
-	
     // Nom de la carte utilisee pour construire ce graphe
     private final String nomCarte ;
 
