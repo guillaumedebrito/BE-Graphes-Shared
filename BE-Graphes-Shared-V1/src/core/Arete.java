@@ -1,7 +1,7 @@
 package core;
 import base.Descripteur;
 
-
+//nique sa tante github
 public class Arete {
 	
 	private int longueurArete;
