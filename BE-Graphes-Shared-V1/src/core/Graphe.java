@@ -7,7 +7,6 @@ package core ;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-
 import base.Couleur;
 import base.Descripteur;
 import base.Dessin;
@@ -39,13 +38,6 @@ public class Graphe {
     // Numero de zone de la carte
     private int numzone ;
 
-    /*
-     * Ces attributs constituent une structure ad-hoc pour stocker les informations du graphe.
-     * Vous devez modifier et ameliorer ce choix de conception simpliste.
-     */
-    private float[] longitudes ;
-    private float[] latitudes ;
-    private Descripteur[] descripteurs ;
 
     
     // Deux malheureux getters.
@@ -55,6 +47,10 @@ public class Graphe {
 
     // Le constructeur cree le graphe en lisant les donnees depuis le DataInputStream
     public Graphe (String nomCarte, DataInputStream dis, Dessin dessin) {
+    	
+    	float[] longitudes ;
+        float[] latitudes ;
+        Descripteur[] descripteurs ;
 
 		this.nomCarte = nomCarte ;
 		this.dessin = dessin ;
@@ -108,7 +104,7 @@ public class Graphe {
 		    
 		    
 		    
-		    this.descripteurs = new Descripteur[nb_descripteurs] ;
+		    descripteurs = new Descripteur[nb_descripteurs] ;
 	
 		    
 		    Utils.checkByte(255, dis) ;
@@ -176,6 +172,7 @@ public class Graphe {
 				    }
 				    
 		    	}
+		    	
 		    }
 		    
 		    Utils.checkByte(253, dis) ;
@@ -240,21 +237,20 @@ public class Graphe {
 	    // On cherche le noeud le plus proche. O(n)
 	    float minDist = Float.MAX_VALUE ;
 	    int   noeud   = 0 ;
-	    
-	    for (int num_node = 0 ; num_node < longitudes.length ; num_node++) {
-		float londiff = (longitudes[num_node] - lon) ;
-		float latdiff = (latitudes[num_node] - lat) ;
-		float dist = londiff*londiff + latdiff*latdiff ;
-		if (dist < minDist) {
-		    noeud = num_node ;
-		    minDist = dist ;
-		}
+	    for(int cptSommet = 0 ; cptSommet<sommets.length ; cptSommet++) {
+	    	float londiff = (sommets[cptSommet].getLongitudes() - lon) ;
+			float latdiff = (sommets[cptSommet].getLatitudes() - lat) ;
+			float dist = londiff*londiff + latdiff*latdiff ;
+			if (dist < minDist) {
+			    noeud = cptSommet ;
+			    minDist = dist ;
+			}
 	    }
 
 	    System.out.println("Noeud le plus proche : " + noeud) ;
 	    System.out.println() ;
 	    dessin.setColor(java.awt.Color.red) ;
-	    dessin.drawPoint(longitudes[noeud], latitudes[noeud], 5) ;
+	    dessin.drawPoint(sommets[noeud].getLongitudes(), sommets[noeud].getLatitudes(), 5) ;
 	}
     }
 
