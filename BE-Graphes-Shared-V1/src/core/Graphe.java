@@ -15,7 +15,7 @@ import base.Utils;
 
 public class Graphe {
 	
-	//thomas le plus beau
+	//thomas le plus beau2
 
 	//list de sommets 
 	private Sommets[] sommets ; 
